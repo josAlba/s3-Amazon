@@ -59,5 +59,19 @@ class s3Amazon{
         
     }
 
+    public function downloadFile($buket,$file){
+
+        try {
+            $result = $this->cliente->getObject([
+                'Bucket' => $buket,
+                'Key'    => $file
+            ]);
+            header("Content-Type: {$result['ContentType']}");
+            echo $result['Body'];
+
+        } catch(Exception $e) {
+			echo 'Acceso no permitido';
+		}
+    }
 
 }
